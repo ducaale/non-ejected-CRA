@@ -2,6 +2,21 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import createValidator, { registerType } from 'typecheck.macro'
+
+type NumberContainer = {
+  pos: Positive;
+}
+type Positive = number;
+
+registerType('NumberContainer')
+
+export const x = createValidator<NumberContainer>(undefined, {
+  constraints: {
+    Positive: (x: Positive) => x > 0
+  }
+})
+
 function App() {
   return (
     <div className="App">
